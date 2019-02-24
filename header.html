@@ -1,0 +1,15 @@
+<ul class="header-nav-list">
+    <li><ap-link-button id="home_button" linkName="home" homeButton>Home</ap-link-button></li>
+    <li><ap-link-button linkName="aaron-main">The Story of Aaron</ap-link-button></li>
+    <li><ap-link-button linkName="sbj-main">The Stars Beyond Jurmir</ap-link-button></li>
+</ul>
+<div id="auth-info">
+    <ap-auth-container permissions="none">
+        <input id="auth-input" onkeyup="OnAuthKeyDown(event)">
+        <button onclick="onAuthButtonClick()">Authorize</button>
+    </ap-auth-container>
+    <ap-auth-container permissions="any">
+        <ap-auth-display></ap-auth-display>
+    </ap-auth-container>
+</div>
+<hr class="full-hr"/>

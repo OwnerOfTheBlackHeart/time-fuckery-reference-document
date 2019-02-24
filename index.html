@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>Placeholder Title</title>
+
+		<link rel="stylesheet" href="styles/home.css" type="text/css">
+		<link rel="stylesheet" href="styles/main.css" type="text/css">
+		<link rel="stylesheet" href="styles/monsters.css" type="text/css">
+		<link rel="stylesheet" href="styles/srd.css" type="text/css">
+		<link rel="stylesheet" href="styles/jurmir.css" type="text/css">
+		<style></style>
+
+        <!-- <script>var buttons;</script> -->
+		<script src="scripts/utilities.js"></script>
+		<script src="scripts/auth.js"></script>
+		<script src="scripts/page-info.js"></script>
+		<script src="campaigns/the-story-of-aaron/scripts/nav.js"></script>
+		<script src="campaigns/the-stars-beyond-jurmir/scripts/nav.js"></script>
+        <script src="scripts/page-list.js"></script>
+		<script src="scripts/io.js"></script>
+		<script src="scripts/master.js"></script>
+		<script src="scripts/encumbrance.js"></script>
+		<script src="scripts/coins.js"></script>
+		<script src="scripts/time.js"></script>
+		<script src="scripts/inventory.js"></script>
+		<script src="scripts/custom-elements/ap-enc-chart.js"></script>
+		<script src="scripts/custom-elements/ap-link-button.js"></script>
+		<script src="scripts/custom-elements/ap-image.js"></script>
+		<script src="scripts/custom-elements/ap-skill-chart.js"></script>
+		<script src="scripts/custom-elements/ap-basic-table.js"></script>
+		<script src="scripts/custom-elements/ap-time-table.js"></script>
+		<script src="scripts/custom-elements/ap-spellbook-table.js"></script>
+		<script src="scripts/custom-elements/ap-auth-container.js"></script>
+		<script src="scripts/custom-elements/ap-auth-display.js"></script>
+	</head>
+
+    <body onload="LoadIntoId('header.html', 'header');
+				  LoadIntoId('footer.html', 'footer');
+				  SetupButtons(LoadPageAtStart('page_area', indexPage, GetPageTitle));">
+
+		<div id="content"> <!-- Where everything goes -->
+		
+			<!-- Our header plus our navigation bar -->
+			<div id="header"></div>
+			
+			<!-- Where we load the code of each page into -->
+			<div id="page_area"></div>
+			
+			<!-- Where we will have our footer -->
+			<div id="footer"></div>
+		</div>
+	</body>
+</html>
