@@ -1,11 +1,13 @@
-var Utilities = 
+/// <reference path="./page-info.ts" />
+
+var Utilities =
 {
-    IsGoodString: function(str)
+    IsGoodString: function(str: string)
     {
         return (str != undefined) && (str != "");
     },
 
-    CreateHeader: function(data, className)
+    CreateHeader: function(data: string, className?: string)
     {
         let header = document.createElement('th');
         header.innerHTML = data;
@@ -18,7 +20,7 @@ var Utilities =
         return header;
     },
 
-    CreateData: function(data, className)
+    CreateData: function(data: string, className?: string)
     {
         let dataElement = document.createElement('td');
         dataElement.innerHTML = data;
@@ -46,7 +48,7 @@ var Utilities =
         return PageInfo.GetPageInfoFromUri(Utilities.GetCurrentPage());
     },
 
-    StringToObject: function(jsonIn)
+    StringToObject: function(jsonIn: string)
     {
         jsonIn = jsonIn.replace(/<.+?>/g, function(x) {
             return x.replace(/"/g, '\\"');

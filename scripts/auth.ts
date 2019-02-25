@@ -1,7 +1,12 @@
-let onAuthChangedValue = [];
+let onAuthChangedValue: ((auth: Auth) => void)[] = [];
 
 class Auth
 {
+	name: string;
+	accessCode: string;
+	permissions: string[];
+
+
     static get currentAuth() {
         if (localStorage.currentAuth && !(localStorage.currentAuth === 'undefined'))
         {
@@ -26,14 +31,14 @@ class Auth
         onAuthChangedValue = val;
     }
 
-    constructor(name, accessCode, permissions)
+    constructor(name: string, accessCode: string, permissions: string[])
     {
         this.name = name;
         this.accessCode = accessCode;
         this.permissions = permissions;
     }
 
-    static CheckAccessLevel(permission)
+    static CheckAccessLevel(permission: string)
     {
         if ((permission === "none") && !Auth.currentAuth) { return true; }
         else if (permission === "none") { return false; }
@@ -45,7 +50,7 @@ class Auth
         }
     }
 
-    static SetAuthByAccessCode(accessCode)
+    static SetAuthByAccessCode(accessCode: string)
     {
         if (accessCode === undefined)
         {

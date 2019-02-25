@@ -2,6 +2,11 @@ const singleCoinWeight = 0.02;
 
 class Coin
 {
+	pp: number;
+	gp: number;
+	sp: number;
+	cp: number;
+
     get weight()
     {
         return (this.pp + this.gp + this.sp + this.cp) * singleCoinWeight;
@@ -12,7 +17,7 @@ class Coin
         return new Coin([0,0,0,0]);
     }
 
-    constructor(coins)
+    constructor(coins: number[])
     {
         this.pp = coins[0];
         this.gp = coins[1];
