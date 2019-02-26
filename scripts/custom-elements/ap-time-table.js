@@ -1,79 +1,45 @@
-/// <reference path="../utilities.ts" />
-/// <reference path="../time.ts" />
-
-class TimeTable extends HTMLElement 
-{
-    get showSeason()
-    {
+class TimeTable extends HTMLElement {
+    get showSeason() {
         return this.hasAttribute('show-season');
     }
-
-    set showSeason(val)
-    {
-        if (val) 
-        {
+    set showSeason(val) {
+        if (val) {
             this.setAttribute('show-season', '');
         }
-        else
-        {
+        else {
             this.removeAttribute('show-season');
         }
     }
-
-    get showAllMonths()
-    {
+    get showAllMonths() {
         return this.hasAttribute('show-all-months');
     }
-
-    set showAllMonths(val)
-    {
-        if (val) 
-        {
+    set showAllMonths(val) {
+        if (val) {
             this.setAttribute('show-all-months', '');
         }
-        else
-        {
+        else {
             this.removeAttribute('show-all-months');
         }
     }
-
-    rows: any[];
-    table: HTMLTableElement;
-    mainNode: HTMLElement;
-
-    constructor()
-    {
-        // Always call super first in constructor
+    constructor() {
         super();
-
         this.rows = [];
         this.table;
         this.mainNode = this;
-
-        if (Utilities.IsGoodString(this.innerHTML))
-        {
+        if (Utilities.IsGoodString(this.innerHTML)) {
             this.rows = Utilities.StringToObject(this.innerHTML);
         }
     }
-
-    connectedCallback()
-    {
+    connectedCallback() {
         this.Render();
     }
-
-    Render()
-    {
+    Render() {
         this.innerHTML = "";
-
-        if (this.rows.length > 0)
-        {
+        if (this.rows.length > 0) {
             this.table = document.createElement('table');
             this.mainNode.appendChild(this.table);
-
-            for (let row of this.rows)
-            {
-                switch (row[0])
-                {
+            for (let row of this.rows) {
+                switch (row[0]) {
                     case "header":
                         this.table.appendChild(this.BuildHeaderRow(row));
                         break;
@@ -82,82 +48,56 @@ class TimeTable extends HTMLElement
                 }
             }
         }
-        else if (this.showAllMonths)
-        {
+        else if (this.showAllMonths) {
             this.table = document.createElement('table');
             this.mainNode.appendChild(this.table);
-
             this.BuildAllMonths(this.table);
         }
     }
-
-    BuildHeaderRow(row: any[])
-    {
+    BuildHeaderRow(row) {
         let node = document.createElement("tr");
         let data = Utilities.CreateHeader(row[1]);
-        
         node.appendChild(data);
         data.setAttribute("colspan", "2");
-
         return node;
     }
-
-    BuildNormalRow(row: any[])
-    {
+    BuildNormalRow(row) {
         let date = new Time(row[0], row[1], row[2]);
         let node = document.createElement("tr");
         node.appendChild(Utilities.CreateData(date.toString(this.showSeason)));
-
-        if (row[3] != undefined)
-        {
+        if (row[3] != undefined) {
             node.appendChild(Utilities.CreateData(row[3]));
         }
-
         return node;
     }
-
-    BuildAllMonths(table: HTMLTableElement)
-    {
-        // The header
+    BuildAllMonths(table) {
         let node = document.createElement('tr');
         let data = Utilities.CreateHeader('List of Months');
-
         table.appendChild(node);
         node.appendChild(data);
         data.setAttribute("colspan", "3");
-
         node = document.createElement('tr');
         data = Utilities.CreateHeader('#');
         table.appendChild(node);
         node.appendChild(data);
-
         data = Utilities.CreateHeader('Month Name');
         table.appendChild(node);
         node.appendChild(data);
-
         data = Utilities.CreateHeader('Season');
         table.appendChild(node);
         node.appendChild(data);
-
-        // The months
-        for (let i = 0; i < TimeRef.months.length; i++)
-        {
+        for (let i = 0; i < TimeRef.months.length; i++) {
             node = document.createElement('tr');
             table.appendChild(node);
-
-            // Month Number
             data = Utilities.CreateData((TimeRef.months[i].position + 1).toString());
             node.appendChild(data);
-
-            // Month Name
             data = Utilities.CreateData(TimeRef.months[i].name);
             node.appendChild(data);
-
-            // Month Season
             data = Utilities.CreateData(TimeRef.months[i].season);
             node.appendChild(data);
         }
     }
-};
-
+}
+;
 customElements.define('ap-time-table', TimeTable);
+//# sourceMappingURL=ap-time-table.js.map

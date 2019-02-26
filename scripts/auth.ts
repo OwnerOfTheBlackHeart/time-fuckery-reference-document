@@ -68,5 +68,6 @@ class Auth
 }
 
 const authList = Object.freeze([
-    new Auth("GM", "The Prophecy", ["all"]),
+    new Auth("Thomas", "The Prophecy", ["all"]),
+    new Auth("Anthony", "nitinol", ["all"]),
 ]);

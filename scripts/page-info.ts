@@ -1,8 +1,14 @@
 class PageInfo
 {
-    constructor(id, url, title, name, external)
+    button: HTMLButtonElement;
+    id: string;
+    url: string;
+    title: string;
+    name: string;
+    external: boolean;
+
+    constructor(id: string, url: string, title: string, name: string, external?: boolean)
     {
-        this.button;
         this.id = id;
         this.url = url;
         this.title = title;
@@ -15,25 +21,25 @@ class PageInfo
     {
         if ((this.id != undefined) && (this.id != ""))
         {
-            this.button = document.getElementById(this.id);
+            this.button = document.getElementById(this.id) as HTMLButtonElement;
         }
     }
 
-    static GetPageInfoFromUri(uri)
+    static GetPageInfoFromUri(uri: string)
     {
         return pages.find((pageInfo) => {
             return pageInfo.url === uri;
         });
     }
 
-    static GetPageInfoFromName(name)
+    static GetPageInfoFromName(name: string)
     {
         return pages.find(pageInfo => {
             return pageInfo.name === name;
         });
     }
 
-    static IsInternalPage(pageInfo)
+    static IsInternalPage(pageInfo: PageInfo)
     {
         return !((pageInfo == undefined) || pageInfo.external);
     }

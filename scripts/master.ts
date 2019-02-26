@@ -1,42 +1,27 @@
-// This file requires the IO.js file to function
+/// <reference path="./page-info.ts" />
+/// <reference path="./io.ts" />
 
 const indexPage = "home.html";
 const page_area = "page_area";
 
-const basic_title = " - World of Jurmir Reference Document";
+const basic_title = " - Time Fuckery Reference Document";
 
-var backButton;
-var backLog = [];
 var currentPage;
 var defaultPage = "home";
 
-function SetActive(pageUrl)
+function SetActiveAndLoad(url: string, title?: string)
 {
-	// Cleanse our active button and set our active button
-	for (const page of pages)
-	{
-        if (page.button != undefined)
-        {
-            if (pageUrl != page.url) ResetButtonActive(page.button);
-            else SetButtonActive(page.button);
-        }
-	}
+	LoadPage(url, undefined, title);
 }
 
-function SetActiveAndLoad(page, title)
-{
-	SetActive(page);
-	LoadPage(page, undefined, title);
-}
-
-function LoadByName(page_name)
+function LoadByName(page_name: string)
 {
     let found = PageInfo.GetPageInfoFromName(page_name);
 
     LoadByPageInfo(found);
 }
 
-function LoadByPageInfo(pageInfo)
+function LoadByPageInfo(pageInfo: PageInfo)
 {
     if (pageInfo != undefined)
     {
@@ -49,7 +34,7 @@ function LoadByPageInfo(pageInfo)
     }
 }
 
-function SetHashByPageInfo(pageInfo)
+function SetHashByPageInfo(pageInfo: PageInfo)
 {
     if (pageInfo != undefined)
     {
@@ -57,37 +42,13 @@ function SetHashByPageInfo(pageInfo)
     }
 }
 
-function SetButtonActive(button)
+function GetPageTitle(uri: string)
 {
-	button.classList.add('active');
-	if (button.classList.contains('navigator')) button.classList.remove('navigator');
-}
+    let pageInfo = PageInfo.GetPageInfoFromUri(uri);
 
-function ResetButtonActive(button)
-{
-	if (button.classList.contains('active')) 
-	{
-		button.classList.remove('active');
-		button.classList.add('navigator');
-	}
-}
-
-function SetupButtons(currentPage)
-{
-    // Update buttons from ids to actual buttons
-	for (const button of pages) { button.UpdateButton(); }
-	
-    // Update our buttons active status if we aren't on the index page
-	SetActive(currentPage);
-}
-
-function GetPageTitle(uri)
-{
-    let button = PageInfo.GetPageInfoFromUri(uri);
-
-    if (button != undefined)
+    if (pageInfo != undefined)
     {
-        return button.title + basic_title;
+        return pageInfo.title + basic_title;
     }
 
     return undefined;
@@ -101,18 +62,17 @@ window.onhashchange = function()
 // ****************** AUTH FUNCTIONS *************************
 function onAuthButtonClick()
 {
-    let authInput = document.getElementById('auth-input');
+    let authInput = document.getElementById('auth-input') as HTMLInputElement;
     Auth.SetAuthByAccessCode(authInput.value);
     authInput.value = "";
 }
 
 function RunOnAuthChanged()
 {
-    console.log("RunOnAuthChanged ran");
     Auth.currentAuth = Auth.currentAuth;
 }
 
-function OnAuthKeyDown(event)
+function OnAuthKeyDown(event: KeyboardEvent)
 {
     if (event.key === "Enter")
     {

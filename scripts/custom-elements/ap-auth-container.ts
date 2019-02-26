@@ -1,3 +1,5 @@
+/// <reference path="../auth.ts" />
+
 class AuthContainer extends HTMLElement 
 {
     get permissions()
@@ -9,6 +11,8 @@ class AuthContainer extends HTMLElement
     {
         this.setAttribute('permissions', val);
     }
+
+    startingDisplay: string;
 
     constructor() 
     {
@@ -57,5 +61,5 @@ class AuthContainer extends HTMLElement
 
 customElements.define('ap-auth-container', AuthContainer);
 
-let AuthContainers = [];
+let AuthContainers: AuthContainer[] = [];
 Auth.onAuthChangedList.push(AuthContainer.UpdateAll);

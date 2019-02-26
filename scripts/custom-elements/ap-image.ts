@@ -1,6 +1,11 @@
+/// <reference path="../page-info.ts" />
+/// <reference path="../page-list.ts" />
+
 class LinkImage extends HTMLElement 
 {
     static get observedAttributes() { return ['linkName', 'disabled']; }
+    image: HTMLImageElement;
+    imagePageInfo: PageInfo;
 
     get linkName()
     {
@@ -12,28 +17,28 @@ class LinkImage extends HTMLElement
         this.setAttribute('linkName', val);
     }
 
-    get height()
+    get height(): number
     {
-        return this.getAttribute('height');
+        return Number(this.getAttribute('height'));
     }
 
-    set height(val)
+    set height(val: number)
     {
-        this.setAttribute('height', val);
+        this.setAttribute('height', val.toString());
         if (this.image)
         {
             this.image.height = val;
         }
     }
 
-    get width()
+    get width(): number
     {
-        return this.getAttribute('width');
+        return Number(this.getAttribute('width'));
     }
 
-    set width(val)
+    set width(val: number)
     {
-        this.setAttribute('width', val);
+        this.setAttribute('width', val.toString());
         if (this.image)
         {
             this.image.width = val;
@@ -71,7 +76,7 @@ class LinkImage extends HTMLElement
         this.appendChild(this.image);       
     }
 
-    attributeChangedCallback(attrName, oldVal, newVal)
+    attributeChangedCallback(attrName: string, oldVal: any, newVal: any)
     {
         if (attrName === "linkName")
         {

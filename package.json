@@ -9,7 +9,7 @@
 		"url": "https://github.com/ashleygwilliams/my_package.git"
 	},
 	"homepage": "https://github.com/ashleygwilliams/my_package",
-	"devDependencies" : {
+	"devDependencies": {
 		"typescript": "^3.3.3333",
 		"eslint": "^5.14.1",
 		"tslint": "^5.13.0"
